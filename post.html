@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Post — aditi.</title>
+<title>Post — Aditi Phopale</title>
 <link rel="stylesheet" href="css/style.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/16.3.0/lib/marked.umd.min.js"></script>
 </head>
@@ -13,9 +13,9 @@
 
 <header class="site-header">
   <div class="wrap nav">
-    <a href="index.html" class="brand">aditi.</a>
+    <a href="/" class="brand">aditi.</a>
     <ul>
-      <li><a href="index.html">Home</a></li>
+      <li><a href="/">Home</a></li>
       <li><a href="projects.html">Projects</a></li>
       <li><a href="blog.html">Blog</a></li>
       <li><a href="https://github.com/aditiphopale" target="_blank" rel="noopener">GitHub</a></li>
@@ -74,7 +74,7 @@
       const meta = posts.find(p => p.slug === slug);
       const mdText = await mdRes.text();
 
-      document.title = (meta ? meta.title : slug) + ' — aditi.';
+      document.title = (meta ? meta.title : slug) + ' — Aditi Phopale';
 
       const bodyHtml = typeof marked !== 'undefined' ? marked.parse(mdText) : mdText;
 
