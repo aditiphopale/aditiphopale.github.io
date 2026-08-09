@@ -105,13 +105,13 @@ HTTPS" for a free SSL certificate.
 
 ## How the Projects page works
 
-`projects.html` calls the public GitHub API
+`projects/index.html` calls the public GitHub API
 (`api.github.com/users/aditiphopale/repos`) directly from the visitor's
 browser and renders each repo as a card. Push a new repo to GitHub and it
 shows up on the site automatically, no edits needed. Until you have any public
 repos, it shows a "No projects live yet" empty state. Forked repos are hidden
 by default — change `HIDE_FORKS` near the top of the `<script>` in
-`projects.html` if you want them shown.
+`projects/index.html` if you want them shown.
 
 ## The background animation
 
@@ -120,17 +120,40 @@ connecting lines, one accent color used sparingly) fixed behind every page.
 It's lightweight, pauses for people with "reduce motion" turned on in their
 OS/browser settings, and needs no extra libraries.
 
+## Clean URLs (no .html)
+
+Each page lives in its own folder as `index.html`, which is what lets GitHub
+Pages serve it without a `.html` extension:
+
+```
+/              → index.html            aditiphopale.com
+/projects/     → projects/index.html   aditiphopale.com/projects/
+/blog/         → blog/index.html       aditiphopale.com/blog/
+/post/?slug=…  → post/index.html       aditiphopale.com/post/?slug=welcome-to-my-site
+```
+
+All internal links and asset references (`/css/style.css`, `/js/particles.js`,
+`/posts/...`) use root-relative absolute paths, so they resolve correctly no
+matter how deep the current page is nested.
+
+The old flat files (`blog.html`, `projects.html`, `post.html`) are kept as
+tiny redirect stubs that forward to the new folder URLs — `post.html` also
+preserves the `?slug=...` query string — so nothing breaks if those were ever
+bookmarked or linked.
+
 ## File structure
 
 ```
-index.html          Home page: hero, About ("The Side Quests"), Contact
-projects.html        Live GitHub project grid
-blog.html            Blog post list
-post.html            Single post view (reads ?slug=... from the URL)
-css/style.css        All styling (dark theme, single accent color)
-js/particles.js      Ambient background particle-network animation
-posts/index.json     Blog post metadata (title, date, excerpt)
-posts/*.md           Blog post content
-CNAME                Tells GitHub Pages which custom domain to serve
-.nojekyll             Disables GitHub's default Jekyll processing
+index.html                  Home page: hero, About ("The Side Quests"), Contact
+projects/index.html          Live GitHub project grid  →  /projects/
+blog/index.html               Blog post list             →  /blog/
+post/index.html                Single post view (reads ?slug=... from the URL)  →  /post/
+blog.html, projects.html,      Redirect stubs → new folder URLs (old bookmarks still work)
+  post.html
+css/style.css                All styling (dark theme, single accent color)
+js/particles.js              Ambient background particle-network animation
+posts/index.json             Blog post metadata (title, date, excerpt)
+posts/*.md                   Blog post content
+CNAME                        Tells GitHub Pages which custom domain to serve
+.nojekyll                     Disables GitHub's default Jekyll processing
 ```
