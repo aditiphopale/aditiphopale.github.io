@@ -3,15 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Blog — Aditi Phopale</title>
+<title>Blog — aditi.</title>
 <meta name="description" content="Writing by Aditi Phopale.">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
+<canvas id="bg-canvas" aria-hidden="true"></canvas>
+
 <header class="site-header">
   <div class="wrap nav">
-    <a href="index.html" class="brand">Aditi Phopale</a>
+    <a href="index.html" class="brand">aditi.</a>
     <ul>
       <li><a href="index.html">Home</a></li>
       <li><a href="projects.html">Projects</a></li>
@@ -27,7 +29,7 @@
     <p class="page-sub">Thoughts, notes, and things I've learned.</p>
 
     <div id="post-list" class="post-list">
-      <p class="state-msg">Loading posts…</p>
+      <p class="state-msg">Loading posts&hellip;</p>
     </div>
   </div>
 </main>
@@ -35,9 +37,14 @@
 <footer>
   <div class="wrap">
     &copy; <span id="year"></span> Aditi Phopale
+    <span class="sep">&middot;</span>
+    <a href="mailto:aphopale2012@gmail.com">aphopale2012@gmail.com</a>
+    <span class="sep">&middot;</span>
+    <a href="https://github.com/aditiphopale" target="_blank" rel="noopener">GitHub</a>
   </div>
 </footer>
 
+<script src="js/particles.js" defer></script>
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
 

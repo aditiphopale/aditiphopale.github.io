@@ -3,15 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Post — Aditi Phopale</title>
+<title>Post — aditi.</title>
 <link rel="stylesheet" href="css/style.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/16.3.0/lib/marked.umd.min.js"></script>
 </head>
 <body>
 
+<canvas id="bg-canvas" aria-hidden="true"></canvas>
+
 <header class="site-header">
   <div class="wrap nav">
-    <a href="index.html" class="brand">Aditi Phopale</a>
+    <a href="index.html" class="brand">aditi.</a>
     <ul>
       <li><a href="index.html">Home</a></li>
       <li><a href="projects.html">Projects</a></li>
@@ -25,7 +27,7 @@
   <div class="wrap">
     <a href="blog.html" class="back-link">&larr; Back to all posts</a>
     <article id="post-article" class="post-article">
-      <p class="state-msg">Loading…</p>
+      <p class="state-msg">Loading&hellip;</p>
     </article>
   </div>
 </main>
@@ -33,9 +35,14 @@
 <footer>
   <div class="wrap">
     &copy; <span id="year"></span> Aditi Phopale
+    <span class="sep">&middot;</span>
+    <a href="mailto:aphopale2012@gmail.com">aphopale2012@gmail.com</a>
+    <span class="sep">&middot;</span>
+    <a href="https://github.com/aditiphopale" target="_blank" rel="noopener">GitHub</a>
   </div>
 </footer>
 
+<script src="js/particles.js" defer></script>
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
 
@@ -67,7 +74,7 @@
       const meta = posts.find(p => p.slug === slug);
       const mdText = await mdRes.text();
 
-      document.title = (meta ? meta.title : slug) + ' — Aditi Phopale';
+      document.title = (meta ? meta.title : slug) + ' — aditi.';
 
       const bodyHtml = typeof marked !== 'undefined' ? marked.parse(mdText) : mdText;
 

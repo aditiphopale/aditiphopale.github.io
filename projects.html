@@ -3,15 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Projects — Aditi Phopale</title>
+<title>Projects — aditi.</title>
 <meta name="description" content="Projects by Aditi Phopale, pulled live from GitHub.">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
+<canvas id="bg-canvas" aria-hidden="true"></canvas>
+
 <header class="site-header">
   <div class="wrap nav">
-    <a href="index.html" class="brand">Aditi Phopale</a>
+    <a href="index.html" class="brand">aditi.</a>
     <ul>
       <li><a href="index.html">Home</a></li>
       <li><a href="projects.html">Projects</a></li>
@@ -27,7 +29,7 @@
     <p class="page-sub">Pulled live from <a href="https://github.com/aditiphopale" target="_blank" rel="noopener">github.com/aditiphopale</a> — no manual updates needed.</p>
 
     <div id="project-grid" class="project-grid">
-      <p class="state-msg">Loading projects…</p>
+      <p class="state-msg">Loading projects&hellip;</p>
     </div>
   </div>
 </main>
@@ -35,16 +37,19 @@
 <footer>
   <div class="wrap">
     &copy; <span id="year"></span> Aditi Phopale
+    <span class="sep">&middot;</span>
+    <a href="mailto:aphopale2012@gmail.com">aphopale2012@gmail.com</a>
+    <span class="sep">&middot;</span>
+    <a href="https://github.com/aditiphopale" target="_blank" rel="noopener">GitHub</a>
   </div>
 </footer>
 
+<script src="js/particles.js" defer></script>
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
 
   const GITHUB_USERNAME = 'aditiphopale';
   const grid = document.getElementById('project-grid');
-
-  // Set to true to hide forked repos from the grid.
   const HIDE_FORKS = true;
 
   function escapeHtml(str) {
@@ -66,7 +71,7 @@
       if (HIDE_FORKS) repos = repos.filter(r => !r.fork);
 
       if (repos.length === 0) {
-        grid.innerHTML = '<p class="state-msg">No public repositories yet.</p>';
+        grid.innerHTML = '<div class="empty-state">No projects live yet — this section is ready to go the moment the first one is.</div>';
         return;
       }
 
@@ -82,7 +87,7 @@
         </div>
       `).join('');
     } catch (err) {
-      grid.innerHTML = `<p class="state-msg">Couldn't load projects right now. View them directly on <a href="https://github.com/${GITHUB_USERNAME}" target="_blank" rel="noopener">GitHub</a>.</p>`;
+      grid.innerHTML = `<div class="empty-state">Couldn't load projects right now. View them directly on <a href="https://github.com/${GITHUB_USERNAME}" target="_blank" rel="noopener">GitHub</a>.</div>`;
       console.error(err);
     }
   }
