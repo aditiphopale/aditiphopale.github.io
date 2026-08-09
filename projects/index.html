@@ -8,9 +8,7 @@
 <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-
 <canvas id="bg-canvas" aria-hidden="true"></canvas>
-
 <header class="site-header">
   <div class="wrap nav">
     <a href="/" class="brand">Aditi Phopale</a>
@@ -22,18 +20,15 @@
     </ul>
   </div>
 </header>
-
 <main>
   <div class="wrap">
     <h1 class="page-title">Projects</h1>
     <p class="page-sub">Pulled live from <a href="https://github.com/aditiphopale" target="_blank" rel="noopener">github.com/aditiphopale</a> — no manual updates needed.</p>
-
     <div id="project-grid" class="project-grid">
       <p class="state-msg">Loading projects&hellip;</p>
     </div>
   </div>
 </main>
-
 <footer>
   <div class="wrap">
     &copy; <span id="year"></span> Aditi Phopale
@@ -41,14 +36,22 @@
     <a href="https://github.com/aditiphopale" target="_blank" rel="noopener">GitHub</a>
   </div>
 </footer>
-
 <script src="/js/particles.js" defer></script>
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
-
   const GITHUB_USERNAME = 'aditiphopale';
   const grid = document.getElementById('project-grid');
-  const HIDE_FORKS = true;
+
+  // GitHub's public REST API has no "pinned" flag (that only exists via
+  // GraphQL, which requires an auth token — unsafe to embed in public JS).
+  // So the pinned set is hardcoded here, in the same order as the profile.
+  // Update this list if you re-pin different repos on GitHub.
+  const PINNED_REPOS = [
+    'Predicting-the-reccurence-of-breast-cancer-cells',
+    'Customer-Segmentation-based-on-TLD-Clustering',
+    'Predicting-the-credit-card-defaulters-',
+    'Text-Classification'
+  ];
 
   function escapeHtml(str) {
     const div = document.createElement('div');
@@ -62,11 +65,15 @@
 
   async function loadProjects() {
     try {
-      const res = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=100`);
-      if (!res.ok) throw new Error(`GitHub API returned ${res.status}`);
-      let repos = await res.json();
+      const results = await Promise.all(
+        PINNED_REPOS.map(async name => {
+          const res = await fetch(`https://api.github.com/repos/${GITHUB_USERNAME}/${name}`);
+          if (!res.ok) return null;
+          return res.json();
+        })
+      );
 
-      if (HIDE_FORKS) repos = repos.filter(r => !r.fork);
+      const repos = results.filter(Boolean);
 
       if (repos.length === 0) {
         grid.innerHTML = '<div class="empty-state">No projects live yet — this section is ready to go the moment the first one is.</div>';
@@ -92,6 +99,5 @@
 
   loadProjects();
 </script>
-
 </body>
 </html>
