@@ -8,9 +8,7 @@
 <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-
 <canvas id="bg-canvas" aria-hidden="true"></canvas>
-
 <header class="site-header">
   <div class="wrap nav">
     <a href="/" class="brand">Aditi Phopale</a>
@@ -22,18 +20,15 @@
     </ul>
   </div>
 </header>
-
 <main>
   <div class="wrap">
-    <h1 class="page-title">Blog</h1>
+    <h1 class="page-title" style="color: var(--accent);">Blog</h1>
     <p class="page-sub">Thoughts, notes, and things I've learned.</p>
-
     <div id="post-list" class="post-list">
       <p class="state-msg">Loading posts&hellip;</p>
     </div>
   </div>
 </main>
-
 <footer>
   <div class="wrap">
     &copy; <span id="year"></span> Aditi Phopale
@@ -41,30 +36,23 @@
     <a href="https://github.com/aditiphopale" target="_blank" rel="noopener">GitHub</a>
   </div>
 </footer>
-
 <script src="/js/particles.js" defer></script>
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
-
   const list = document.getElementById('post-list');
-
   function formatDate(iso) {
     return new Date(iso + 'T00:00:00').toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
   }
-
   async function loadPosts() {
     try {
       const res = await fetch('/posts/index.json');
       if (!res.ok) throw new Error('Could not load posts/index.json');
       const posts = await res.json();
-
       posts.sort((a, b) => new Date(b.date) - new Date(a.date));
-
       if (posts.length === 0) {
         list.innerHTML = '<p class="state-msg">No posts yet — check back soon.</p>';
         return;
       }
-
       list.innerHTML = posts.map(p => `
         <article class="post-preview">
           <h2><a href="/post/?slug=${encodeURIComponent(p.slug)}">${p.title}</a></h2>
@@ -77,9 +65,7 @@
       console.error(err);
     }
   }
-
   loadPosts();
 </script>
-
 </body>
 </html>
