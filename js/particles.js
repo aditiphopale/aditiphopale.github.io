@@ -3,13 +3,31 @@
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
 
-  const ACCENT = [129, 140, 248];   // indigo accent, used sparingly
-  const DOT = [255, 255, 255];       // faint white dots
-  const LINK_DIST = 150;             // max distance to draw a connecting line
-  const PARTICLE_COUNT_BASE = 95;    // scaled by viewport area below
+  // Weighted color palette — mostly white, with a scattering of accent
+  // colors for visual interest. Weights are relative, not percentages.
+  const PALETTE = [
+    { rgb: [255, 255, 255], weight: 45, alpha: 0.65 }, // white
+    { rgb: [129, 140, 248], weight: 18, alpha: 0.85 }, // indigo / violet
+    { rgb: [56, 189, 248], weight: 13, alpha: 0.85 },  // cyan
+    { rgb: [244, 114, 182], weight: 12, alpha: 0.85 }, // pink
+    { rgb: [251, 146, 60], weight: 12, alpha: 0.85 }   // coral / amber
+  ];
+  const PALETTE_TOTAL = PALETTE.reduce((sum, p) => sum + p.weight, 0);
 
-  const REPEL_RADIUS = 150;          // how close the cursor needs to be to push a particle
-  const REPEL_STRENGTH = 38;         // max px a particle gets pushed at close range
+  function pickColor() {
+    let r = Math.random() * PALETTE_TOTAL;
+    for (const p of PALETTE) {
+      if (r < p.weight) return p;
+      r -= p.weight;
+    }
+    return PALETTE[0];
+  }
+
+  const LINK_DIST = 160;             // max distance to draw a connecting line
+  const PARTICLE_COUNT_BASE = 110;   // scaled by viewport area below
+
+  const REPEL_RADIUS = 160;          // how close the cursor needs to be to push a particle
+  const REPEL_STRENGTH = 42;         // max px a particle gets pushed at close range
   const EASE_IN = 0.15;              // how fast particles react to the cursor
   const EASE_OUT = 0.06;             // how fast particles settle back when cursor moves away
 
@@ -31,31 +49,32 @@
 
   function makeParticles() {
     const area = w * h;
-    const count = Math.max(36, Math.min(140, Math.round(PARTICLE_COUNT_BASE * area / (1440 * 900))));
-    particles = new Array(count).fill(0).map(() => ({
-      x: Math.random() * w,
-      y: Math.random() * h,
-      vx: (Math.random() - 0.5) * 0.18,
-      vy: (Math.random() - 0.5) * 0.18,
-      r: Math.random() * 1.6 + 0.8,
-      accent: Math.random() < 0.15,
-      // offset from natural drift position, pushed by cursor proximity
-      ox: 0,
-      oy: 0
-    }));
+    const count = Math.max(40, Math.min(160, Math.round(PARTICLE_COUNT_BASE * area / (1440 * 900))));
+    particles = new Array(count).fill(0).map(() => {
+      const color = pickColor();
+      return {
+        x: Math.random() * w,
+        y: Math.random() * h,
+        vx: (Math.random() - 0.5) * 0.18,
+        vy: (Math.random() - 0.5) * 0.18,
+        r: Math.random() * 2.2 + 1.4,
+        rgb: color.rgb,
+        alpha: color.alpha,
+        ox: 0,
+        oy: 0
+      };
+    });
   }
 
   function step() {
     ctx.clearRect(0, 0, w, h);
 
-    // update + draw dots
     for (const p of particles) {
       p.x += p.vx;
       p.y += p.vy;
       if (p.x < 0) p.x = w; else if (p.x > w) p.x = 0;
       if (p.y < 0) p.y = h; else if (p.y > h) p.y = 0;
 
-      // cursor repulsion: push away smoothly, ease back when out of range
       const dx = p.x - mouseX, dy = p.y - mouseY;
       const dist = Math.sqrt(dx * dx + dy * dy);
 
@@ -71,14 +90,12 @@
       }
 
       const rx = p.x + p.ox, ry = p.y + p.oy;
-      const c = p.accent ? ACCENT : DOT;
       ctx.beginPath();
       ctx.arc(rx, ry, p.r, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(${c[0]},${c[1]},${c[2]},${p.accent ? 0.7 : 0.5})`;
+      ctx.fillStyle = `rgba(${p.rgb[0]},${p.rgb[1]},${p.rgb[2]},${p.alpha})`;
       ctx.fill();
     }
 
-    // draw connecting lines between nearby particles (using displaced positions)
     for (let i = 0; i < particles.length; i++) {
       for (let j = i + 1; j < particles.length; j++) {
         const a = particles[i], b = particles[j];
@@ -87,7 +104,7 @@
         const dx = ax - bx, dy = ay - by;
         const dist = Math.sqrt(dx * dx + dy * dy);
         if (dist < LINK_DIST) {
-          const alpha = (1 - dist / LINK_DIST) * 0.16;
+          const alpha = (1 - dist / LINK_DIST) * 0.22;
           ctx.beginPath();
           ctx.moveTo(ax, ay);
           ctx.lineTo(bx, by);
@@ -115,9 +132,6 @@
     }, 150);
   });
 
-  // Canvas has pointer-events:none so it never blocks clicks — listen on
-  // window instead. clientX/clientY line up with our coordinate space
-  // since the canvas covers the full viewport.
   if (!reduceMotion) {
     window.addEventListener('mousemove', e => {
       mouseX = e.clientX;
