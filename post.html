@@ -2,93 +2,13 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Post — Aditi Phopale</title>
-<link rel="stylesheet" href="css/style.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/16.3.0/lib/marked.umd.min.js"></script>
+<title>aditi. — post</title>
+<script>
+  // Preserve ?slug=... when forwarding to the new /post/ location.
+  location.replace('/post/' + window.location.search);
+</script>
 </head>
 <body>
-
-<canvas id="bg-canvas" aria-hidden="true"></canvas>
-
-<header class="site-header">
-  <div class="wrap nav">
-    <a href="/" class="brand">aditi.</a>
-    <ul>
-      <li><a href="/">Home</a></li>
-      <li><a href="projects.html">Projects</a></li>
-      <li><a href="blog.html">Blog</a></li>
-      <li><a href="https://github.com/aditiphopale" target="_blank" rel="noopener">GitHub</a></li>
-    </ul>
-  </div>
-</header>
-
-<main>
-  <div class="wrap">
-    <a href="blog.html" class="back-link">&larr; Back to all posts</a>
-    <article id="post-article" class="post-article">
-      <p class="state-msg">Loading&hellip;</p>
-    </article>
-  </div>
-</main>
-
-<footer>
-  <div class="wrap">
-    &copy; <span id="year"></span> Aditi Phopale
-    <span class="sep">&middot;</span>
-    <a href="https://github.com/aditiphopale" target="_blank" rel="noopener">GitHub</a>
-  </div>
-</footer>
-
-<script src="js/particles.js" defer></script>
-<script>
-  document.getElementById('year').textContent = new Date().getFullYear();
-
-  const article = document.getElementById('post-article');
-
-  function formatDate(iso) {
-    return new Date(iso + 'T00:00:00').toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-  }
-
-  function getSlug() {
-    return new URLSearchParams(window.location.search).get('slug');
-  }
-
-  async function loadPost() {
-    const slug = getSlug();
-    if (!slug) {
-      article.innerHTML = '<p class="state-msg">No post specified.</p>';
-      return;
-    }
-
-    try {
-      const [metaRes, mdRes] = await Promise.all([
-        fetch('posts/index.json'),
-        fetch(`posts/${slug}.md`)
-      ]);
-
-      if (!mdRes.ok) throw new Error('Post not found');
-      const posts = metaRes.ok ? await metaRes.json() : [];
-      const meta = posts.find(p => p.slug === slug);
-      const mdText = await mdRes.text();
-
-      document.title = (meta ? meta.title : slug) + ' — Aditi Phopale';
-
-      const bodyHtml = typeof marked !== 'undefined' ? marked.parse(mdText) : mdText;
-
-      article.innerHTML = `
-        <h1>${meta ? meta.title : slug}</h1>
-        ${meta ? `<p class="post-date">${formatDate(meta.date)}</p>` : ''}
-        <div class="post-body">${bodyHtml}</div>
-      `;
-    } catch (err) {
-      article.innerHTML = '<p class="state-msg">Couldn\'t find that post.</p>';
-      console.error(err);
-    }
-  }
-
-  loadPost();
-</script>
-
+  <p>This post has moved — redirecting to <a href="/blog/">the blog</a>.</p>
 </body>
 </html>

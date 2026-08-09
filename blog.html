@@ -2,84 +2,14 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Blog — Aditi Phopale</title>
-<meta name="description" content="Writing by Aditi Phopale.">
-<link rel="stylesheet" href="css/style.css">
+<meta http-equiv="refresh" content="0; url=/blog/">
+<link rel="canonical" href="/blog/">
+<title>aditi. — blog</title>
+<script>
+  location.replace('/blog/');
+</script>
 </head>
 <body>
-
-<canvas id="bg-canvas" aria-hidden="true"></canvas>
-
-<header class="site-header">
-  <div class="wrap nav">
-    <a href="/" class="brand">aditi.</a>
-    <ul>
-      <li><a href="/">Home</a></li>
-      <li><a href="projects.html">Projects</a></li>
-      <li><a href="blog.html">Blog</a></li>
-      <li><a href="https://github.com/aditiphopale" target="_blank" rel="noopener">GitHub</a></li>
-    </ul>
-  </div>
-</header>
-
-<main>
-  <div class="wrap">
-    <h1 class="page-title">Blog</h1>
-    <p class="page-sub">Thoughts, notes, and things I've learned.</p>
-
-    <div id="post-list" class="post-list">
-      <p class="state-msg">Loading posts&hellip;</p>
-    </div>
-  </div>
-</main>
-
-<footer>
-  <div class="wrap">
-    &copy; <span id="year"></span> Aditi Phopale
-    <span class="sep">&middot;</span>
-    <a href="https://github.com/aditiphopale" target="_blank" rel="noopener">GitHub</a>
-  </div>
-</footer>
-
-<script src="js/particles.js" defer></script>
-<script>
-  document.getElementById('year').textContent = new Date().getFullYear();
-
-  const list = document.getElementById('post-list');
-
-  function formatDate(iso) {
-    return new Date(iso + 'T00:00:00').toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-  }
-
-  async function loadPosts() {
-    try {
-      const res = await fetch('posts/index.json');
-      if (!res.ok) throw new Error('Could not load posts/index.json');
-      const posts = await res.json();
-
-      posts.sort((a, b) => new Date(b.date) - new Date(a.date));
-
-      if (posts.length === 0) {
-        list.innerHTML = '<p class="state-msg">No posts yet — check back soon.</p>';
-        return;
-      }
-
-      list.innerHTML = posts.map(p => `
-        <article class="post-preview">
-          <h2><a href="post.html?slug=${encodeURIComponent(p.slug)}">${p.title}</a></h2>
-          <p class="post-date">${formatDate(p.date)}</p>
-          <p class="post-excerpt">${p.excerpt || ''}</p>
-        </article>
-      `).join('');
-    } catch (err) {
-      list.innerHTML = '<p class="state-msg">Couldn\'t load posts right now.</p>';
-      console.error(err);
-    }
-  }
-
-  loadPosts();
-</script>
-
+  <p>The blog has moved — redirecting to <a href="/blog/">the new URL</a>.</p>
 </body>
 </html>
