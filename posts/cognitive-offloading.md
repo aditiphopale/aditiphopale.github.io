@@ -125,10 +125,4 @@
 <p>Socrates was wrong about memory. He may simply have been early about judgment.</p>
 <p>The danger was never that AI would think for us. It's that we'd stop noticing we'd let it — that the outsourcing would feel so convenient, so reasonable, one small email at a time, that we'd never register the moment we stopped trusting ourselves.</p>
 <div class="closing-q">How much of your own judgment would you trade for the relief of not having to use it?</div>
-<div class="sources">
-<strong>Sources</strong>
-MIT Media Lab, "Your Brain on ChatGPT: Accumulation of Cognitive Debt when Using an AI Assistant for Essay Writing Task" (2025 preprint) — media.mit.edu<br>
-Gerlich, M., "AI Tools in Society: Impacts on Cognitive Offloading and the Future of Critical Thinking," Societies (2025) — mdpi.com<br>
-Clinical AI-deskilling finding on radiologist tumor-detection accuracy, as cited via ANSI / peer research summaries (2025)
-</div>
 </div>
