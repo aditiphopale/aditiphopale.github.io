@@ -1,0 +1,139 @@
+<div class="cog-post">
+<style>
+.cog-post {
+  --c-bg: #08090d;
+  --c-card: #101218;
+  --c-border: #1f212b;
+  --c-text: #eceef2;
+  --c-muted: #888b96;
+  --c-body: #b9bac2;
+  --c-accent: #818cf8;
+  --c-accent-soft: rgba(129, 140, 248, 0.10);
+  --c-tier2: #f2b263;
+  --c-tier3: #ef7d6d;
+  --c-mono: ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+}
+.cog-post .badge { display:inline-flex; align-items:center; gap:8px; font-family:var(--c-mono); font-size:11px; letter-spacing:0.08em; color:var(--c-muted); border:1px solid var(--c-border); padding:6px 14px; border-radius:999px; margin-bottom:24px; }
+.cog-post .badge .dot { width:6px; height:6px; border-radius:50%; background:var(--c-accent); box-shadow:0 0 8px rgba(129,140,248,0.7); }
+.cog-post .hero-art { margin:8px 0 32px; border:1px solid var(--c-border); border-radius:14px; background:var(--c-card); overflow:hidden; }
+.cog-post p { font-size:16px; color:var(--c-body); margin:0 0 20px; line-height:1.7; }
+.cog-post .lede { font-size:18px; color:var(--c-text); }
+.cog-post h2 { display:flex; align-items:center; gap:12px; font-size:13px; text-transform:uppercase; letter-spacing:0.1em; font-weight:600; color:var(--c-accent); margin:56px 0 22px; }
+.cog-post h2 .icon { width:28px; height:28px; flex:0 0 28px; display:flex; align-items:center; justify-content:center; border:1px solid var(--c-border); border-radius:8px; background:var(--c-card); }
+.cog-post h4 { font-size:16px; font-weight:600; margin:0 0 6px; color:var(--c-text); }
+.cog-post em { color:var(--c-text); font-style:italic; }
+.cog-post strong { font-weight:700; color:var(--c-text); }
+.cog-post .stat-row { display:grid; grid-template-columns:repeat(3, 1fr); gap:12px; margin:32px 0 10px; }
+.cog-post .stat-card { background:var(--c-card); border:1px solid var(--c-border); border-radius:12px; padding:20px 16px; text-align:center; }
+.cog-post .stat-num { font-size:24px; font-weight:700; color:var(--c-accent); line-height:1.1; margin-bottom:8px; font-family:var(--c-mono); }
+.cog-post .stat-label { font-size:12px; color:var(--c-muted); line-height:1.45; }
+.cog-post .caption { font-family:var(--c-mono); font-size:11px; color:var(--c-muted); text-align:right; margin-top:8px; margin-bottom:36px; letter-spacing:0.02em; }
+.cog-post .callout { background:var(--c-accent-soft); border:1px solid rgba(129,140,248,0.28); border-left:3px solid var(--c-accent); border-radius:8px; padding:22px 24px; margin:32px 0; }
+.cog-post .callout-label { font-family:var(--c-mono); font-size:11px; text-transform:uppercase; letter-spacing:0.08em; font-weight:600; color:var(--c-accent); margin-bottom:10px; }
+.cog-post .callout p { font-size:14.5px; margin:0; color:var(--c-text); }
+.cog-post .chart-card { border:1px solid var(--c-border); background:var(--c-card); border-radius:12px; padding:26px 24px 18px; margin:32px 0 8px; }
+.cog-post .chart-title { font-size:14px; font-weight:600; color:var(--c-text); margin-bottom:2px; }
+.cog-post .chart-sub { font-size:12px; color:var(--c-muted); margin-bottom:20px; }
+.cog-post .stack-row { margin-bottom:16px; }
+.cog-post .stack-label { display:flex; justify-content:space-between; font-family:var(--c-mono); font-size:11.5px; color:var(--c-muted); margin-bottom:6px; }
+.cog-post .stack-label strong { color:var(--c-text); font-family:-apple-system,sans-serif; font-weight:600; font-size:13px; }
+.cog-post .stack-track { display:flex; width:100%; height:20px; border-radius:6px; overflow:hidden; background:#161822; border:1px solid var(--c-border); }
+.cog-post .seg-memory { background:#818cf8; opacity:0.35; }
+.cog-post .seg-thinking { background:var(--c-tier2); opacity:0.85; }
+.cog-post .seg-judgment { background:var(--c-tier3); }
+.cog-post .seg-empty { background:transparent; }
+.cog-post .legend { display:flex; gap:18px; flex-wrap:wrap; margin-top:16px; padding-top:14px; border-top:1px solid var(--c-border); }
+.cog-post .legend-item { display:flex; align-items:center; gap:7px; font-size:11.5px; color:var(--c-muted); font-family:var(--c-mono); }
+.cog-post .legend-dot { width:9px; height:9px; border-radius:2px; }
+.cog-post .bar-row { margin-bottom:18px; }
+.cog-post .bar-row-top { display:flex; justify-content:space-between; margin-bottom:7px; }
+.cog-post .bar-row-top .name { font-size:13.5px; font-weight:600; color:var(--c-text); }
+.cog-post .bar-row-top .val { font-family:var(--c-mono); font-size:11.5px; color:var(--c-accent); }
+.cog-post .bar-track { width:100%; height:14px; background:#161822; border-radius:4px; border:1px solid var(--c-border); overflow:hidden; }
+.cog-post .bar-fill { height:100%; border-radius:4px; background:linear-gradient(90deg, #5b63d1, #818cf8); }
+.cog-post .tier-flow { margin:32px 0 8px; }
+.cog-post .tier { display:flex; align-items:flex-start; gap:16px; background:var(--c-card); border:1px solid var(--c-border); border-radius:12px; padding:20px 22px; }
+.cog-post .tier-icon { flex:0 0 42px; height:42px; border-radius:10px; display:flex; align-items:center; justify-content:center; background:var(--c-accent-soft); border:1px solid rgba(129,140,248,0.28); }
+.cog-post .tier-2 .tier-icon { background:rgba(242,178,99,0.10); border-color:rgba(242,178,99,0.28); }
+.cog-post .tier-3 .tier-icon { background:rgba(239,125,109,0.10); border-color:rgba(239,125,109,0.28); }
+.cog-post .tier-body h4 { display:flex; align-items:center; gap:10px; margin:2px 0 8px; font-size:16px; }
+.cog-post .tier-body p { font-size:14px; color:var(--c-muted); margin:0; line-height:1.6; }
+.cog-post .tier-tag { font-family:var(--c-mono); display:inline-block; font-size:10px; text-transform:uppercase; letter-spacing:0.06em; font-weight:600; color:var(--c-accent); padding:2px 9px; border-radius:999px; border:1px solid rgba(129,140,248,0.3); }
+.cog-post .tier-2 .tier-tag { color:var(--c-tier2); border-color:rgba(242,178,99,0.35); }
+.cog-post .tier-3 .tier-tag { color:var(--c-tier3); border-color:rgba(239,125,109,0.35); }
+.cog-post .arrow-down { display:flex; justify-content:center; padding:8px 0; }
+.cog-post blockquote { margin:40px 0; padding:4px 0 4px 22px; border-left:3px solid var(--c-accent); font-size:21px; line-height:1.5; font-weight:500; color:var(--c-text); }
+.cog-post .sources { margin-top:56px; padding-top:24px; border-top:1px solid var(--c-border); font-family:var(--c-mono); font-size:11.5px; color:var(--c-muted); line-height:2; }
+.cog-post .sources strong { display:block; color:var(--c-text); font-size:11px; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:10px; font-family:-apple-system,sans-serif; font-weight:600; }
+.cog-post .closing-q { font-size:19px; font-weight:600; text-align:center; margin:48px 0 8px; color:var(--c-text); padding:28px 24px; border:1px solid var(--c-border); border-radius:12px; background:var(--c-card); }
+@media (max-width: 620px) {
+  .cog-post .stat-row { grid-template-columns:1fr; }
+  .cog-post p, .cog-post .lede { font-size:15.5px; }
+  .cog-post blockquote { font-size:18px; }
+  .cog-post .tier { flex-direction:column; }
+}
+</style>
+<div class="badge"><span class="dot"></span>AI &amp; SOCIETY · 7 MIN READ</div>
+<div class="hero-art">
+<svg viewBox="0 0 760 220" width="100%" height="220" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="fadeGrad" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#818cf8" stop-opacity="0.95"/><stop offset="55%" stop-color="#818cf8" stop-opacity="0.45"/><stop offset="100%" stop-color="#818cf8" stop-opacity="0.12"/></linearGradient></defs><rect width="760" height="220" fill="#101218"/><g stroke="url(#fadeGrad)" stroke-width="1.4" fill="none"><line x1="60" y1="60" x2="150" y2="40"/><line x1="60" y1="60" x2="140" y2="110"/><line x1="150" y1="40" x2="240" y2="70"/><line x1="140" y1="110" x2="240" y2="70"/><line x1="140" y1="110" x2="220" y2="160"/><line x1="60" y1="60" x2="40" y2="150"/><line x1="40" y1="150" x2="140" y2="110"/><line x1="240" y1="70" x2="340" y2="55"/><line x1="220" y1="160" x2="340" y2="140"/><line x1="340" y1="55" x2="340" y2="140"/><line x1="340" y1="55" x2="440" y2="80"/><line x1="340" y1="140" x2="440" y2="120"/><line x1="440" y1="80" x2="440" y2="120"/><line x1="440" y1="80" x2="540" y2="90"/><line x1="440" y1="120" x2="540" y2="130"/><line x1="540" y1="90" x2="540" y2="130"/><line x1="540" y1="90" x2="640" y2="100"/><line x1="540" y1="130" x2="640" y2="120"/><line x1="640" y1="100" x2="700" y2="108"/><line x1="640" y1="120" x2="700" y2="112"/></g><g fill="#818cf8"><circle cx="60" cy="60" r="5"/><circle cx="150" cy="40" r="4.5"/><circle cx="140" cy="110" r="5"/><circle cx="40" cy="150" r="4"/><circle cx="240" cy="70" r="4.5"/><circle cx="220" cy="160" r="4"/><circle cx="340" cy="55" r="3.6" opacity="0.75"/><circle cx="340" cy="140" r="3.6" opacity="0.75"/><circle cx="440" cy="80" r="3" opacity="0.55"/><circle cx="440" cy="120" r="3" opacity="0.55"/><circle cx="540" cy="90" r="2.4" opacity="0.4"/><circle cx="540" cy="130" r="2.4" opacity="0.4"/><circle cx="640" cy="100" r="2" opacity="0.28"/><circle cx="640" cy="120" r="2" opacity="0.28"/><circle cx="700" cy="108" r="1.6" opacity="0.18"/><circle cx="700" cy="112" r="1.6" opacity="0.18"/></g><text x="50" y="195" fill="#888b96" font-family="ui-monospace, Menlo, monospace" font-size="10.5" letter-spacing="0.5">UNASSISTED</text><text x="640" y="195" fill="#888b96" font-family="ui-monospace, Menlo, monospace" font-size="10.5" letter-spacing="0.5" text-anchor="end">AI-ASSISTED</text></svg>
+</div>
+<p class="lede">A few weeks ago, I watched a friend try to write a two-line email to her landlord. She opened ChatGPT, typed a rough version of what she wanted to say, and waited for it to hand back a "better" one. It was a two-line email. She has a graduate degree. She has written thousands of emails in her life. But in that moment, she didn't trust herself to write two sentences without help.</p>
+<p>I don't think she's lazy. I think she's early evidence of something bigger than any of us have fully reckoned with: we are not just using AI as a tool. We are handing it pieces of our minds, one small surrender at a time, and most of us haven't noticed the pattern yet.</p>
+<div class="stat-row">
+<div class="stat-card"><div class="stat-num">↓ WEAKEST</div><div class="stat-label">Neural connectivity in LLM-assisted writers vs. search-engine and unassisted groups</div></div>
+<div class="stat-card"><div class="stat-num">−6%</div><div class="stat-label">Drop in clinicians' unassisted tumor-detection accuracy, 3 months after adopting AI support</div></div>
+<div class="stat-card"><div class="stat-num">666</div><div class="stat-label">Participants in a 2025 study linking heavy AI use to lower critical-thinking scores</div></div>
+</div>
+<div class="caption">SOURCES: MIT MEDIA LAB (2025) · CLINICAL DESKILLING STUDY · GERLICH (2025), SOCIETIES</div>
+<h2><span class="icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#818cf8" stroke-width="2"><path d="M12 2 2 7l10 5 10-5-10-5Z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg></span>We've Done This Before — Sort Of</h2>
+<p>Socrates hated writing. In the <em>Phaedrus</em>, he warns that if people learn to write, they'll stop exercising their memory, and wisdom will curdle into the mere appearance of wisdom — people who've read things but never wrestled with them. He was, in a narrow sense, right: nobody memorizes epic poems anymore. And he was, in the larger sense, wrong: writing didn't destroy human thought, it <em>extended</em> it.</p>
+<p>Calculators did the same to arithmetic. GPS did it to spatial memory. Search engines did it to trivia. Each time, we lost a capacity and gained bandwidth for something else. This is the comfortable story we tell ourselves about AI too — it's just the next tool in a long line of tools.</p>
+<div class="chart-card">
+<div class="chart-title">Where Each Tool Reaches Into the Cognitive Stack</div>
+<div class="chart-sub">Illustrative model — how far offloading extends past memory into thinking and judgment</div>
+<div class="stack-row"><div class="stack-label"><strong>Writing</strong><span>memory only</span></div><div class="stack-track"><div class="seg-memory" style="width:30%"></div><div class="seg-empty" style="width:70%"></div></div></div>
+<div class="stack-row"><div class="stack-label"><strong>Calculator</strong><span>memory only</span></div><div class="stack-track"><div class="seg-memory" style="width:28%"></div><div class="seg-empty" style="width:72%"></div></div></div>
+<div class="stack-row"><div class="stack-label"><strong>GPS</strong><span>memory only</span></div><div class="stack-track"><div class="seg-memory" style="width:32%"></div><div class="seg-empty" style="width:68%"></div></div></div>
+<div class="stack-row"><div class="stack-label"><strong>Search engine</strong><span>memory → thinking</span></div><div class="stack-track"><div class="seg-memory" style="width:35%"></div><div class="seg-thinking" style="width:25%"></div><div class="seg-empty" style="width:40%"></div></div></div>
+<div class="stack-row"><div class="stack-label"><strong>AI (LLMs)</strong><span>memory → thinking → judgment</span></div><div class="stack-track"><div class="seg-memory" style="width:30%"></div><div class="seg-thinking" style="width:30%"></div><div class="seg-judgment" style="width:35%"></div></div></div>
+<div class="legend"><div class="legend-item"><span class="legend-dot" style="background:#818cf8; opacity:0.35;"></span>Memory</div><div class="legend-item"><span class="legend-dot" style="background:#f2b263;"></span>Thinking</div><div class="legend-item"><span class="legend-dot" style="background:#ef7d6d;"></span>Judgment</div></div>
+</div>
+<p>Every offloading device before this one handled <em>execution</em>. A calculator doesn't decide what problem to solve — you do. AI is the first tool in history that can perform the step before execution: it can <em>decide</em>. That changes what's actually at stake.</p>
+<h2><span class="icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#818cf8" stroke-width="2"><path d="M12 2a7 7 0 0 0-4 12.7V17a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2v-2.3A7 7 0 0 0 12 2Z"/><path d="M10 22h4"/></svg></span>Three Tiers of Surrender</h2>
+<p>Not all offloading costs the same. It helps to separate what we're giving up into three tiers, because they escalate.</p>
+<div class="tier-flow">
+<div class="tier tier-1"><div class="tier-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#818cf8" stroke-width="1.8"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 9h16M9 9v11"/></svg></div><div class="tier-body"><h4>Memory <span class="tier-tag">Low risk</span></h4><p>Phone numbers, routes, facts we could look up in seconds. Something is lost — active recall builds the brain in ways passive lookup doesn't — but the trade has mostly been worth it.</p></div></div>
+<div class="arrow-down"><svg width="18" height="24" viewBox="0 0 18 24"><path d="M9 0v18M9 18l-7-7M9 18l7-7" stroke="#3a3d4a" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+<div class="tier tier-2"><div class="tier-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f2b263" stroke-width="1.8"><path d="M9 18h6M10 22h4M12 2a6 6 0 0 0-3.6 10.8c.6.5 1 1.2 1.1 2H14.5c.1-.8.5-1.5 1.1-2A6 6 0 0 0 12 2Z"/></svg></div><div class="tier-body"><h4>Thinking <span class="tier-tag">Rising risk</span></h4><p>The drafting, outlining, working-through-a-problem labor that used to be inseparable from having an idea. Skip that struggle enough times and you don't get faster thinkers — you get people fluent in other people's conclusions.</p></div></div>
+<div class="arrow-down"><svg width="18" height="24" viewBox="0 0 18 24"><path d="M9 0v18M9 18l-7-7M9 18l7-7" stroke="#3a3d4a" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+<div class="tier tier-3"><div class="tier-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ef7d6d" stroke-width="1.8"><path d="M12 3v18M5 7l-3 6a3.5 3.5 0 0 0 6 0L5 7ZM19 7l-3 6a3.5 3.5 0 0 0 6 0l-3-6ZM5 7h14M8 21h8"/></svg></div><div class="tier-body"><h4>Judgment <span class="tier-tag">High risk</span></h4><p>Deciding what's true, what's ethical, what's the right call. We're not skipping a boring step here. We're skipping the part of being a person that makes a person's choices theirs.</p></div></div>
+</div>
+<h2><span class="icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#818cf8" stroke-width="2"><path d="M3 3v18h18M7 15l4-6 4 3 5-8"/></svg></span>What It Actually Costs</h2>
+<p>The cost isn't stupidity. It's something closer to atrophy of nerve. Independent judgment isn't a fact you can look up — it's a muscle built by sitting with discomfort, ambiguity, and the risk of being wrong, over and over, until you trust your own read on things.</p>
+<div class="chart-card">
+<div class="chart-title">Neural Connectivity by Writing Method</div>
+<div class="chart-sub">EEG-measured brain connectivity while writing an essay, by assistance type — MIT Media Lab, 2025 (qualitative ranking; preprint)</div>
+<div class="bar-row"><div class="bar-row-top"><span class="name">Brain-only (unassisted)</span><span class="val">STRONGEST</span></div><div class="bar-track"><div class="bar-fill" style="width:92%"></div></div></div>
+<div class="bar-row"><div class="bar-row-top"><span class="name">Search engine</span><span class="val">INTERMEDIATE</span></div><div class="bar-track"><div class="bar-fill" style="width:58%"></div></div></div>
+<div class="bar-row"><div class="bar-row-top"><span class="name">LLM-assisted</span><span class="val">WEAKEST</span></div><div class="bar-track"><div class="bar-fill" style="width:28%"></div></div></div>
+</div>
+<div class="callout">
+<div class="callout-label">The evidence so far</div>
+<p>MIT Media Lab's 2025 EEG study on LLM-assisted essay writing found brain connectivity scaled down with the amount of external support: unassisted writers showed the widest neural engagement, search-engine users were intermediate, and LLM users showed the weakest coupling. The LLM group also struggled to quote their own essays minutes after writing them. It's a preprint, not yet peer-reviewed — but the direction of the finding lines up with a separate result from clinical practice: three months after radiologists began using AI-assisted diagnosis, their ability to detect tumors <em>without</em> it had already dropped.</p>
+</div>
+<p>Scale that up to a generation that has never had to sit with a hard problem unaided, and you don't get a smarter society. You get a more efficient one, populated by people who are individually less equipped to think for themselves — and that asymmetry doesn't distribute its benefits evenly. Someone is still doing the hard thinking. Increasingly, it's a small number of labs deciding, by default, what "good judgment" outputs look like for everyone else.</p>
+<h2><span class="icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#818cf8" stroke-width="2"><path d="M12 3v3M12 18v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M3 12h3M18 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/><circle cx="12" cy="12" r="4"/></svg></span>The Honest Counterargument</h2>
+<p>None of this means offloading is inherently corrosive. Nobody mourns long division. Freeing up cognitive capacity from rote tasks is, on balance, how civilization has always advanced. If AI simply absorbed our trivia and our arithmetic, this would be a non-story.</p>
+<blockquote>Arithmetic has a right answer that exists independent of you. Judgment doesn't — it's constituted by the person making it.</blockquote>
+<p>When you offload a calculation, you lose nothing of yourself. When you offload a judgment, you lose a little bit of the thing that was making the call. Do that enough times, across enough decisions, and it's fair to ask what's left of the "you" that used to do it.</p>
+<h2><span class="icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#818cf8" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.9.4-1.5 1-1.5 2.2M12 17.5h.01"/></svg></span>The Question Worth Sitting With</h2>
+<p>Socrates was wrong about memory. He may simply have been early about judgment.</p>
+<p>The danger was never that AI would think for us. It's that we'd stop noticing we'd let it — that the outsourcing would feel so convenient, so reasonable, one small email at a time, that we'd never register the moment we stopped trusting ourselves.</p>
+<div class="closing-q">How much of your own judgment would you trade for the relief of not having to use it?</div>
+<div class="sources">
+<strong>Sources</strong>
+MIT Media Lab, "Your Brain on ChatGPT: Accumulation of Cognitive Debt when Using an AI Assistant for Essay Writing Task" (2025 preprint) — media.mit.edu<br>
+Gerlich, M., "AI Tools in Society: Impacts on Cognitive Offloading and the Future of Critical Thinking," Societies (2025) — mdpi.com<br>
+Clinical AI-deskilling finding on radiologist tumor-detection accuracy, as cited via ANSI / peer research summaries (2025)
+</div>
+</div>
