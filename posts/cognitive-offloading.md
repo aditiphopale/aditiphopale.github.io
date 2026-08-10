@@ -79,12 +79,7 @@
 </div>
 <p class="lede">A few weeks ago, a friend — a director at a mid-size company — had to decide which of two people on her team to lay off. Same role, similar tenure, both good at their jobs in different ways. She'd managed people for over a decade, sat through a dozen layoffs from both sides of the table. But instead of trusting the read she'd built over years of watching these two work, she typed up their performance notes, pasted them into an AI model, and asked it to tell her who to let go. Not 'help me write the notice.' Not 'how do I deliver this.' She wanted the decision made for her — and she wanted a machine to be the one holding it, so she wouldn't have to.</p>
 <p>I don't think she's lost the instinct to size people up. I think she's early evidence of something bigger than any of us have fully reckoned with: we're not just using AI to draft or calculate anymore. We're handing it our judgment — the part of us that weighs a person, a career, a decision that can't be undone — and most of us haven't noticed the pattern yet.</p>
-<div class="stat-row">
-<div class="stat-card"><div class="stat-num">↓ WEAKEST</div><div class="stat-label">Neural connectivity in LLM-assisted writers vs. search-engine and unassisted groups</div></div>
-<div class="stat-card"><div class="stat-num">−6%</div><div class="stat-label">Drop in clinicians' unassisted tumor-detection accuracy, 3 months after adopting AI support</div></div>
-<div class="stat-card"><div class="stat-num">666</div><div class="stat-label">Participants in a 2025 study linking heavy AI use to lower critical-thinking scores</div></div>
-</div>
-<div class="caption">SOURCES: MIT MEDIA LAB (2025) · CLINICAL DESKILLING STUDY · GERLICH (2025), SOCIETIES</div>
+
 <h2><span class="icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#818cf8" stroke-width="2"><path d="M12 2 2 7l10 5 10-5-10-5Z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg></span>We've Done This Before — Sort Of</h2>
 <p>Socrates hated writing. In the <em>Phaedrus</em>, he warns that if people learn to write, they'll stop exercising their memory, and wisdom will curdle into the mere appearance of wisdom — people who've read things but never wrestled with them. He was, in a narrow sense, right: nobody memorizes epic poems anymore. And he was, in the larger sense, wrong: writing didn't destroy human thought, it <em>extended</em> it.</p>
 <p>Calculators did the same to arithmetic. GPS did it to spatial memory. Search engines did it to trivia. Each time, we lost a capacity and gained bandwidth for something else. This is the comfortable story we tell ourselves about AI too — it's just the next tool in a long line of tools.</p>
