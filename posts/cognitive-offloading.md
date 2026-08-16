@@ -150,7 +150,6 @@
 </button>
 <div class="tool-card-body"><div class="tool-card-body-inner">
 <p>Writing offloads memory — the exact wording of a thought, not the thought itself. It never drafts your argument or decides what's true.</p>
-<div class="tool-card-tags"><span class="tag-pill state-no">Decides: No</span><span class="tag-pill state-no">Harm on record: No</span></div>
 </div></div>
 </div>
 <div class="tool-card">
@@ -161,7 +160,6 @@
 </button>
 <div class="tool-card-body"><div class="tool-card-body-inner">
 <p>A calculator offloads memory — the multiplication table you'd otherwise hold in your head. It never decides which problem is worth solving.</p>
-<div class="tool-card-tags"><span class="tag-pill state-no">Decides: No</span><span class="tag-pill state-no">Harm on record: No</span></div>
 </div></div>
 </div>
 <div class="tool-card">
@@ -172,7 +170,6 @@
 </button>
 <div class="tool-card-body"><div class="tool-card-body-inner">
 <p>GPS offloads memory — the mental map of a route. It never decides where you should actually be going.</p>
-<div class="tool-card-tags"><span class="tag-pill state-no">Decides: No</span><span class="tag-pill state-no">Harm on record: No</span></div>
 </div></div>
 </div>
 <div class="tool-card">
@@ -183,7 +180,6 @@
 </button>
 <div class="tool-card-body"><div class="tool-card-body-inner">
 <p>A search engine offloads memory and edges into thinking — it can summarize, but you still have to form the judgment on what it means.</p>
-<div class="tool-card-tags"><span class="tag-pill state-partial">Decides: Partial</span><span class="tag-pill state-no">Harm on record: No</span></div>
 </div></div>
 </div>
 <div class="tool-card">
@@ -194,7 +190,6 @@
 </button>
 <div class="tool-card-body"><div class="tool-card-body-inner">
 <p>AI reaches into memory, thinking, <em>and</em> judgment — the only tool here that can decide, not just execute.</p>
-<div class="tool-card-tags"><span class="tag-pill state-yes">Decides: Yes</span><span class="tag-pill state-yes">Harm on record: Yes</span></div>
 </div></div>
 </div>
 </div>
