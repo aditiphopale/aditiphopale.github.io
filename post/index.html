@@ -8,7 +8,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/16.3.0/lib/marked.umd.min.js"></script>
 </head>
 <body>
-
 <header class="site-header">
   <div class="wrap nav">
     <a href="/" class="brand">Aditi Phopale</a>
@@ -20,7 +19,6 @@
     </ul>
   </div>
 </header>
-
 <main>
   <div class="wrap">
     <a href="/blog/" class="back-link">&larr; Back to all posts</a>
@@ -29,63 +27,62 @@
     </article>
   </div>
 </main>
-
 <footer>
   <div class="wrap">
     &copy; <span id="year"></span> Aditi Phopale
   </div>
 </footer>
-
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
-
   const article = document.getElementById('post-article');
-
   function formatDate(iso) {
     return new Date(iso + 'T00:00:00').toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
   }
-
   function getSlug() {
     return new URLSearchParams(window.location.search).get('slug');
   }
-
+  // Scripts inserted via innerHTML never execute — that's a browser rule, not a bug.
+  // This manually re-creates any <script> tags found in injected post content so
+  // they actually run. Needed for any post that wants real click/JS interactivity.
+  function executeScripts(container) {
+    container.querySelectorAll('script').forEach(oldScript => {
+      const newScript = document.createElement('script');
+      Array.from(oldScript.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value));
+      newScript.textContent = oldScript.textContent;
+      oldScript.parentNode.replaceChild(newScript, oldScript);
+    });
+  }
   async function loadPost() {
     const slug = getSlug();
     if (!slug) {
       article.innerHTML = '<p class="state-msg">No post specified.</p>';
       return;
     }
-
     try {
       const [metaRes, mdRes] = await Promise.all([
         fetch('/posts/index.json'),
         fetch(`/posts/${slug}.md`)
       ]);
-
       if (!mdRes.ok) throw new Error('Post not found');
       const posts = metaRes.ok ? await metaRes.json() : [];
       const meta = posts.find(p => p.slug === slug);
       const mdText = await mdRes.text();
-
       const rawTitle = meta ? meta.title : slug;
       const plainTitle = rawTitle.replace(/<[^>]+>/g, '');
       document.title = plainTitle + ' — Aditi Phopale';
-
       const bodyHtml = typeof marked !== 'undefined' ? marked.parse(mdText) : mdText;
-
       article.innerHTML = `
         <h1>${rawTitle}</h1>
         ${meta ? `<p class="post-date">${formatDate(meta.date)}</p>` : ''}
         <div class="post-body">${bodyHtml}</div>
       `;
+      executeScripts(article);
     } catch (err) {
       article.innerHTML = '<p class="state-msg">Couldn\'t find that post.</p>';
       console.error(err);
     }
   }
-
   loadPost();
 </script>
-
 </body>
 </html>
